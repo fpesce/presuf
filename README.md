@@ -1,5 +1,5 @@
 # PreSuf
-[![Build Status](https://travis-ci.org/fpesce/presuf.svg?branch=master)](https://travis-ci.org/fpesce/presuf) 
+[![Build Status](https://travis-ci.org/fpesce/presuf.svg?branch=main)](https://travis-ci.org/fpesce/presuf) 
 
 A tool to plan for efficient exploration of suffix and prefix spaces when bruteforcing passwords.
 
