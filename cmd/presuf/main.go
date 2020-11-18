@@ -161,7 +161,7 @@ func main() {
 							Prefix: string(oldPrefixes[currentPass]),
 							Count:  oldPrefixesCounts[currentPass],
 						})
-						if len(currentPrefixHeap) >= nbCandidates[i] {
+						if len(currentPrefixHeap) > nbCandidates[i] {
 							heap.Pop(&currentPrefixHeap)
 						}
 					} else {
@@ -182,7 +182,7 @@ func main() {
 			Prefix: string(oldPrefixes[currentPass]),
 			Count:  oldPrefixesCounts[currentPass],
 		})
-		if len(currentPrefixHeap) >= nbCandidates[currentPass] {
+		if len(currentPrefixHeap) > nbCandidates[currentPass] {
 			heap.Pop(&currentPrefixHeap)
 		}
 		// Now cache results for that pass in the corresponding map
