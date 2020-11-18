@@ -20,7 +20,7 @@ It would be probably more advantageous to explore the 5 letters `miss.` prefix b
 
 This is ran on a sorted file (I usually prefer to `export LC_ALL=C` before all operation, incl. `sort`).
 ```
-$ ./presub -input passwords.txt -min-prefix 4 -max-prefix 6 > last-results.txt
+$ ./presub -input passwords.txt -min-prefix 4 -max-prefix 6 -crypt-per-sec 20000000 -duration 169h > last-results.txt
 ```
 
 you could generate the same data for suffixes by reversing your passwords file first, a tool (reverse) is offered to do that.
