@@ -13,7 +13,7 @@ If your currently cracked list shows a pattern where you have:
 250 4 letters prefix baby
 ```
 
-It would be probably more advantageous to explore the 5 letters `miss.` prefix but then you should remove this pattern from the 4 letters prefixes, and this place `baby` as a better candidate.
+It would be probably more advantageous to explore the 5 letters `miss.` prefix but then you should remove this pattern from the 4 letters prefixes, and this place `baby` as a better 4-characters prefix candidate than `miss`.
 
 
 ## Running
