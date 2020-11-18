@@ -28,7 +28,7 @@ import (
 )
 
 var flagFilename string
-var flagCryptPerSecond int
+var flagCryptPerSecond int64
 var flagDuration string
 var flagMinPrefixLen int /* e.g. 4 */
 var flagMaxPrefixLen int /* e.g. 7 */
@@ -37,7 +37,7 @@ var flagAlphabetSize int /* e.g. 95 */
 
 func init() {
 	flag.StringVar(&flagFilename, "input", "", "name of the sorted word file")
-	flag.IntVar(&flagCryptPerSecond, "crypt-per-sec", 20000000, "reported rypt per second (e.g. John the ripper c/s)")
+	flag.Int64Var(&flagCryptPerSecond, "crypt-per-sec", 20000000, "reported crypt per second (e.g. John the ripper c/s or hashcat Speed.#*)")
 	flag.StringVar(&flagDuration, "duration", "168h", "time to run the cracking session on all prefixes")
 	flag.IntVar(&flagMinPrefixLen, "min-prefix", 4, "minimal length of the Prefix space to search")
 	flag.IntVar(&flagMaxPrefixLen, "max-prefix", 7, "maximal length of the Prefix space to search")
@@ -194,7 +194,21 @@ func main() {
 	/* Now for the grand finale */
 	for i := 0; i < nbPrefixes; i++ {
 		for k, v := range prefixMaps[i] {
-			fmt.Printf("%d:%s\n", v, k)
+			/* avoid re-exploring subspace already done by shorter prefixes:
+			TODO: An advanced backward and then forward propagation of the prefix in a 2nd set of passes.
+			*/
+			hasShortestPrefixMatched := false
+			if i != 0 {
+				for j := 0; j < i && !hasShortestPrefixMatched; j++ {
+					prefixLen := j + flagMinPrefixLen
+					if _, ok := prefixMaps[j][k[0:prefixLen]]; ok {
+						hasShortestPrefixMatched = true
+					}
+				}
+			}
+			if !hasShortestPrefixMatched {
+				fmt.Printf("%d:%s\n", v, k)
+			}
 		}
 	}
 }
